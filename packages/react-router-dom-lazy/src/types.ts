@@ -1,12 +1,14 @@
 import { PreloadableComponent } from './lazyWithPreload';
+import { RouteProps } from 'react-router-dom';
 
 export type ConfigAndComponent = {
   config: {
-    path: string;
+    path: RouteProps['path'];
     strict?: boolean;
     exact?: boolean;
   };
   component: PreloadableComponent<any>
+  id?: string;
 }
 
 

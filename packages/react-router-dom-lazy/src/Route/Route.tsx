@@ -13,7 +13,7 @@ const Route = <T extends ComponentType<any>>(props: Props<T>) => {
   const { registerComponent } = useContext(PreloadContextSetter);
 
   useEffect(() => {
-    registerComponent({
+    const unregister = registerComponent({
       component: props.component,
       config: {
         path: props.path,
@@ -21,6 +21,7 @@ const Route = <T extends ComponentType<any>>(props: Props<T>) => {
         strict: props.strict,
       },
     });
+    return unregister;
   }, [props.path, props.component, props.path, props.strict, registerComponent]);
 
   return (

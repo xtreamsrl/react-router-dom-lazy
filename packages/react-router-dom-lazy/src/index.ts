@@ -1,13 +1,21 @@
 import lazyWithPreload from './lazyWithPreload';
 import Link from './Link';
+import NavLink from './NavLink';
 import PreloadConfig from './PreloadConfig';
 import PreloadProvider from './PreloadProvider';
-import Route from './Route';
+import PreloadableRoute from './Route';
+import { usePreloading } from './usePreloading';
+import Switch from './Switch';
+import { Route } from 'react-router-dom';
 
 export {
   lazyWithPreload,
   PreloadProvider,
-  Route,
+  PreloadableRoute,
   Link,
+  NavLink,
   PreloadConfig,
+  usePreloading,
+  Switch as PreloadingSwitch,
+  Route,
 };

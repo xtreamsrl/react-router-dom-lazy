@@ -9,13 +9,19 @@ type Props = {
   config?: Config;
 };
 
+let incrementalId = 0;
+
 const PreloadProvider: React.FC<Props> = ({ children, config }) => {
 
   const [_, setComponentsConfigs, componentsConfigsRef] = useStateWithRef<ConfigAndComponent[]>([]);
 
   const registerComponent = useCallback((config: ConfigAndComponent) => {
-    console.debug('registering component', config);
-    setComponentsConfigs(currentMap => ([...currentMap, config]));
+    const currentId = incrementalId++;
+    setComponentsConfigs(registeredComponents => ([...registeredComponents, {
+      ...config,
+      id: (currentId).toString(),
+    }]));
+    return () => setComponentsConfigs(registeredComponents => registeredComponents.filter(c => c.id !== currentId.toString()));
   }, []);
 
   const contextSetterValue = useMemo(() => ({

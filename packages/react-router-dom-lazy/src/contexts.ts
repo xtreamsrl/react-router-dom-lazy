@@ -8,9 +8,9 @@ export const PreloadContext = React.createContext<{
 });
 
 export const PreloadContextSetter = React.createContext<{
-  registerComponent: (config: ConfigAndComponent) => void
+  registerComponent: (config: ConfigAndComponent) => ()=>void
 }>({
-  registerComponent: () => ({}),
+  registerComponent: () => ()=>({}),
 });
 
 export const PreloadContextConfig = React.createContext<Config>({

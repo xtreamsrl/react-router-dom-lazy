@@ -1,14 +1,14 @@
 import React, { useRef } from 'react';
-import { Link as BaseLink, LinkProps } from 'react-router-dom';
+import { NavLink as BaseNavLink, NavLinkProps } from 'react-router-dom';
 import { usePreloading } from '../usePreloading';
 
 type Props = {
   preloadWhenVisible?: boolean;
   preload?: boolean;
-} & LinkProps;
+} & NavLinkProps;
 
 
-const Link: React.FC<Props> = (props) => {
+const NavLink: React.FC<Props> = (props) => {
 
   const anchorRef = useRef<HTMLAnchorElement>(null);
 
@@ -22,10 +22,10 @@ const Link: React.FC<Props> = (props) => {
     elementRef: anchorRef,
   });
 
-  return <BaseLink ref={anchorRef} {...props}
+  return <BaseNavLink ref={anchorRef} {...props}
                    onMouseEnter={preload} />;
 };
 
-Link.displayName = 'Link';
+NavLink.displayName = 'BaseNavLink';
 
-export default Link;
+export default NavLink;
