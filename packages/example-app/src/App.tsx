@@ -1,17 +1,18 @@
 import React, { Suspense } from 'react';
-import { lazyWithPreload, Link, PreloadConfig, Route } from 'react-router-dom-lazy';
-import { Route as BaseRoute, Switch } from 'react-router-dom';
+import { lazyWithPreload, Link, PreloadConfig, PreloadingSwitch as Switch, Route } from 'react-router-dom-lazy';
+import CustomButtonLink from './CustomButtonLink';
 
-const A = lazyWithPreload(() => import('./ModuleA'));
-const B = lazyWithPreload(() => import('./ModuleB'));
-const C = lazyWithPreload(() => import('./ModuleC'));
+const PageA = lazyWithPreload(() => import('./PageA'));
+const PageB = lazyWithPreload(() => import('./PageB'));
+const PageC = lazyWithPreload(() => import('./PageC'));
+const PageD = lazyWithPreload(() => import('./PageD'));
 
 function App() {
   return (
     <div className="App">
       <Suspense fallback={null}>
         <Switch>
-          <BaseRoute exact
+          <Route exact
                      path="/">
             <PreloadConfig config={{ intersectionEnabled: false }}>
               <Link to="/a">
@@ -20,6 +21,8 @@ function App() {
               <Link to="/b">
                 b
               </Link>
+              <CustomButtonLink path="/d"
+                                label="link to d" />
             </PreloadConfig>
             <div style={{ height: '1500px' }}>
 
@@ -27,16 +30,20 @@ function App() {
             <Link to="/c">
               c
             </Link>
+            <CustomButtonLink path="/d"
+                              label="link to d" />
             <div style={{ height: '300px' }}>
 
             </div>
-          </BaseRoute>
-          <Route component={A}
+          </Route>
+          <Route component={PageA}
                  path="/a" />
-          <Route component={B}
+          <Route component={PageB}
                  path="/b" />
-          <Route component={C}
+          <Route component={PageC}
                  path="/c" />
+          <Route component={PageD}
+                 path="/d" />
         </Switch>
       </Suspense>
 
